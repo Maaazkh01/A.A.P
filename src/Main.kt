@@ -1,4 +1,3 @@
-
 open class Bankaccount(var balance: Double)
 {
     open fun deposit(amount:Double){
