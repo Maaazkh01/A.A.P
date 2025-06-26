@@ -27,7 +27,6 @@ class Savingsaccount(balance:Double,val interestrate:Double):Bankaccount(balance
         println("INTEREST APPLIED")
         println("INTEREST AMOUNT:- $interest")
     }
-
 }
 class Currentaccount(balance:Double,val overdraft:Double):Bankaccount(balance){
     override fun withdraw(amount:Double){
@@ -39,7 +38,6 @@ class Currentaccount(balance:Double,val overdraft:Double):Bankaccount(balance){
             println("OVERDRAFT LIMIT EXCEEDED")
         }
     }
-
 }
 fun main(){
     val savings=Savingsaccount(10000.0,10.0)
