@@ -1,58 +1,61 @@
-// Create classes BankAccount, SavingsAccount, and CurrentAccount.
-// Implement methods like deposit, withdraw, displayBalance
-// Add overdraft limit in CurrentAccount and interest rate in SavingsAccount.
-//use accountNumber to identify accounts.
 
-
-open class BankAccount(val accountNumber: String, var balance: Double) {
-    open fun deposit(amount: Double) {
-        if (amount > 0) {
-            balance += amount
-            println("Deposited $$amount. New balance: $$balance")
-        } else {
-            println("Deposit amount must be positive.")
+open class Bankaccount(var balance: Double)
+{
+    open fun deposit(amount:Double){
+        balance +=amount
+        println("DEPOSIT SUCCESSFUL")
+        println("DEPOSITED AMOUNT:- $amount" )
+    }
+    open fun withdraw(amount:Double){
+        if(balance<amount){
+            println("Insufficient balance")
+        }else{
+            balance -=amount
+           println("WITHDRAWAL SUCCESSFUL")
+           println("WITHDRAWN AMOUNT:- $amount")
         }
     }
 
-    open fun withdraw(amount: Double) {
-        if (amount > 0 && amount <= balance) {
-            balance -= amount
-            println("Withdrew $$amount. New balance: $$balance")
-        } else {
-            println("Insufficient funds or invalid withdrawal amount.")
+    open fun displaybalance(){
+        println("BALANCE:- $balance")
+        println("=====================================")
+    }
+}
+class Savingsaccount(balance:Double,val interestrate:Double):Bankaccount(balance){
+    fun applyinterest(){
+        val interest=balance*interestrate/100
+        balance+=interest
+        println("INTEREST APPLIED")
+        println("INTEREST AMOUNT:- $interest")
+    }
+
+}
+class Currentaccount(balance:Double,val overdraft:Double):Bankaccount(balance){
+    override fun withdraw(amount:Double){
+        if (balance+overdraft>=amount){
+            balance-=amount
+            println("WITHDRAWAL SUCCESSFUL")
+            println("WITHDRAWN AMOUNT:- $amount")
+        }else{
+            println("OVERDRAFT LIMIT EXCEEDED")
         }
     }
+
 }
-class SavingsAccount(accountNumber: String, balance: Double) : BankAccount(accountNumber, balance) {
-    private val interestRate = 0.03 // 3% interest rate
+fun main(){
+    val savings=Savingsaccount(10000.0,10.0)
+    val current=Currentaccount(5000.0,2000.0)
 
-    fun applyInterest() {
-        val interest = balance * interestRate
-        deposit(interest)
-        println("Applied interest of $$interest. New balance: $$balance")
-    }
-}
-class CurrentAccount(accountNumber: String, balance: Double) : BankAccount(accountNumber, balance) {
-    private val overdraftLimit = 500.0 // Overdraft limit of $500
+    savings.deposit(1000.0)
+    savings.applyinterest()
+    savings.displaybalance()
 
-    override fun withdraw(amount: Double) {
-        if (amount > 0 && (balance + overdraftLimit) >= amount) {
-            balance -= amount
-            println("Withdrew $$amount. New balance: $$balance")
-        } else {
-            println("Withdrawal exceeds overdraft limit or invalid amount.")
-        }
-    }
-}
-
-fun main() {
-    val savingsAccount = SavingsAccount("SA12345", 1000.0)
-    savingsAccount.deposit(200.0)
-    savingsAccount.withdraw(150.0)
-    savingsAccount.applyInterest()
-
-    val currentAccount = CurrentAccount("CA12345", 500.0)
-    currentAccount.deposit(300.0)
-    currentAccount.withdraw(700.0) // Should succeed due to overdraft limit
-    currentAccount.withdraw(1000.0) // Should fail due to overdraft limit
+    current.withdraw(5000.0)
+    current.displaybalance()
+    current.withdraw(1000.0)
+    current.displaybalance()
+    current.withdraw(1000.0)
+    current.displaybalance()
+    current.withdraw(1000.0)
+    current.displaybalance()
 }
