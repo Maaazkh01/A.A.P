@@ -31,7 +31,7 @@ fun main() {
     addTask("Go to gym", "2025-06-23")
     addTask("Buy groceries", "2025-06-24")
 
-    markComplete("Go to gym")
+    markComplete(" Go to gym ")
 
     println("All Tasks:")
     for (t in tasks) println(t)
