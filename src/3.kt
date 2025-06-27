@@ -13,7 +13,7 @@ class Student(val name: String, val math: Int, val science: Int, val english: In
         else if (avg >= 80) "B"
         else if (avg >= 70) "C"
         else if (avg >= 60) "D"
-        else "F"
+        else " F "
     }
 }
 
