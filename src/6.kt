@@ -34,7 +34,7 @@ fun main() {
     val str2 = "hello world this is kotlin"
     val str3 = "this is a title case test"
 
-    println("Is '$str1' a palindrome? → ${str1.isPalindrome()}")
+    println("Is '$str1' a palindrome? →  ${str1.isPalindrome()}")
     println("Word count in '$str2' → ${str2.wordCount()}")
     println("Title Case of '$str3' → ${str3.toTitleCase()}")
 }
