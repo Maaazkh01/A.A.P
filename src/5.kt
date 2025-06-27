@@ -50,7 +50,7 @@ fun main() {
     val scifi = getMoviesByGenre("Sci-Fi")
     for (m in scifi) println(m)
 
-    println("\nMovies sorted by rating:")
+    println("\nMovies sorted by rating: ")
     val sortedRating = sortByRating()
     for (m in sortedRating) println(m)
 
